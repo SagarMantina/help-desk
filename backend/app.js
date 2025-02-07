@@ -31,7 +31,8 @@ const User = mongoose.model('User', userSchema);
 const allowedOrigins = [
   "http://localhost:5173",
   "https://help-desk-bfld.onrender.com",
-  "https://help-desk-1-r2rl.onrender.com" 
+  "https://help-desk-1-r2rl.onrender.com" ,
+   "https://help-desk-10ycdjlcs-mantina-sagars-projects.vercel.app"
 ];
 
 
