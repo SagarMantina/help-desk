@@ -7,7 +7,7 @@ import AdminPage from "./pages/AdminPage";
 import CustomerPage from "./pages/CustomerPage";
 import AgentPage from "./pages/AgentPage";
 import HomePage from "./pages/HomePage";
-const backend_url = process.env.REACT_APP_BACKEND_URL || "http://localhost:5000";
+const backend_url = "https://help-desk-bfld.onrender.com" || "http://localhost:5000";
 console.log(backend_url);
 function App() {
   const [role, setRole] = useState(null);
