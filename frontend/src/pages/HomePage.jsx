@@ -33,7 +33,7 @@ const HomePage = () => {
   };
 
   const handleSignupRedirect = () => {
-    navigate('/signup');
+    navigate('/register');
   };
 
   // Handle logout and redirect to home page
