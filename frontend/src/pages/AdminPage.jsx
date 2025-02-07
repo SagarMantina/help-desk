@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+const backend_url = "https://help-desk-bfld.onrender.com" || "http://localhost:5000";
 const AdminPage = () => {
   const [tickets, setTickets] = useState([]);
   const [note, setNote] = useState("");
