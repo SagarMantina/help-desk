@@ -21,7 +21,7 @@ const AdminPage = () => {
 
   const fetchTickets = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/all/tickets", {
+      const response = await fetch(`${backend_url}/api/all/tickets`, {
         method: "GET",
         credentials: "include",
         headers: {
@@ -41,7 +41,7 @@ const AdminPage = () => {
 
   const fetchUsers = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/all/users", {
+      const response = await fetch(`${backend_url}/api/all/users`, {
         method: "GET",
         credentials: "include",
         headers: {
@@ -58,7 +58,7 @@ const AdminPage = () => {
 
   const fetchUserStats = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/users/stats", {
+      const response = await fetch(`${backend_url}/api/users/stats`, {
         method: "GET",
         credentials: "include",
         headers: {
@@ -75,7 +75,7 @@ const AdminPage = () => {
 
   const handleAddNote = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/tickets/${id}/notes`, {
+      const response = await fetch(`${backend_url}/api/tickets/${id}/notes`, {
         method: "POST",
         credentials: "include",
         headers: {
@@ -97,7 +97,7 @@ const AdminPage = () => {
 
   const handleUpdateStatus = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/tickets/${id}/status`, {
+      const response = await fetch(`${backend_url}/api/tickets/${id}/status`, {
         method: "PUT",
         credentials: "include",
         headers: {
@@ -121,7 +121,7 @@ const AdminPage = () => {
     try {
       if (!role || role === "choose") return; // Ensure the role is not empty or "choose"
 
-      const response = await fetch(`http://localhost:5000/api/update_users/${id}`, {
+      const response = await fetch(`${backend_url}/api/update_users/${id}`, {
         method: "PUT",
         credentials: "include",
         headers: {
@@ -148,7 +148,7 @@ const AdminPage = () => {
 
   const handleDeleteUser = async (id) => {
     try {
-      const response = await fetch("http://localhost:5000/api/delete_users", {
+      const response = await fetch(`${backend_url}/api/delete_users`, {
         method: "POST",
         credentials: "include",
         headers: {

@@ -7,7 +7,7 @@ import AdminPage from "./pages/AdminPage";
 import CustomerPage from "./pages/CustomerPage";
 import AgentPage from "./pages/AgentPage";
 import HomePage from "./pages/HomePage";
-
+const backend_url = process.env.REACT_APP_BACKEND_URL;
 function App() {
   const [role, setRole] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -15,7 +15,7 @@ function App() {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/role_check", {
+        const res = await fetch(`${backend_url}/api/role_check`, {
           method: "GET",
           credentials: "include",
           headers: {

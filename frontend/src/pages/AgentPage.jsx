@@ -1,173 +1,4 @@
 
-
-// import React, { useState, useEffect } from "react";
-
-// const AgentPage = () => {
-//   const [tickets, setTickets] = useState([]);
-//   const [note, setNote] = useState("");
-//   const [selectedTicket, setSelectedTicket] = useState(null);
-//   const [newStatus, setNewStatus] = useState("");
-//   const [showNotes, setShowNotes] = useState(null); // To toggle notes visibility
-
-//   useEffect(() => {
-//     fetchTickets();
-//   }, []);
-
-//   const fetchTickets = async () => {
-//     try {
-//       const response = await fetch("http://localhost:5000/api/all/tickets", {
-//         method: "GET",
-//         credentials: "include",
-//         headers: {
-//           "Content-Type": "application/json",
-//         },
-//       });
-
-//       if (!response.ok) throw new Error("Failed to fetch tickets");
-      
-//       const data = await response.json(); // Extract JSON data
-//       setTickets(data || []); // Ensure it's always an array
-//     } catch (error) {
-//       console.error("Error fetching tickets", error);
-//       setTickets([]); // Prevents tickets from being undefined
-//     }
-//   };
-
-//   const handleAddNote = async (id) => {
-//     try {
-//       const response = await fetch(`http://localhost:5000/api/tickets/${id}/notes`, {
-//         method: "POST",
-//         credentials: "include",
-//         headers: {
-//           "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify({ text: note, addedBy: "Agent" }), // Agent adds the note
-//       });
-
-//       if (!response.ok) throw new Error("Failed to add note");
-
-//       const updatedTicket = await response.json();
-//       setTickets(tickets.map(ticket => ticket._id === updatedTicket._id ? updatedTicket : ticket));
-//       setNote("");
-//       setSelectedTicket(null); // Close note input
-//     } catch (error) {
-//       console.error("Error adding note", error);
-//     }
-//   };
-
-//   const handleUpdateStatus = async (id) => {
-//     try {
-//       const response = await fetch(`http://localhost:5000/api/tickets/${id}/status`, {
-//         method: "PUT",
-//         credentials: "include",
-//         headers: {
-//           "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify({ status: newStatus }),
-//       });
-
-//       if (!response.ok) throw new Error("Failed to update ticket status");
-
-//       const updatedTicket = await response.json();
-//       setTickets(tickets.map(ticket => ticket._id === updatedTicket._id ? updatedTicket : ticket));
-//       setNewStatus(""); // Clear status input after updating
-//     } catch (error) {
-//       console.error("Error updating ticket status", error);
-//     }
-//   };
-
-//   // Toggle to show/hide notes for a ticket
-//   const toggleNotes = (ticketId) => {
-//     setShowNotes((prevState) => (prevState === ticketId ? null : ticketId));
-//   };
-
-//   return (
-//     <div className="p-6 max-w-4xl mx-auto">
-//       <h1 className="text-3xl font-bold mb-6">Agent Support Dashboard</h1>
-
-//       {/* List of Tickets */}
-//       <div>
-//         <h2 className="text-xl font-semibold mb-3">All Tickets</h2>
-//         {tickets.length > 0 ? (
-//           tickets.map((ticket) => (
-//             <div key={ticket._id} className="bg-gray-100 p-4 rounded-lg mb-4 shadow">
-//               <p className="text-lg font-semibold">{ticket.title}</p>
-//               <p className="text-sm text-gray-600">Customer: {ticket.customerName}</p>
-//               <p className="text-sm text-gray-600">Status: {ticket.status}</p>
-//               <button
-//                 onClick={() => setSelectedTicket(ticket._id)}
-//                 className="text-blue-500 mt-2 underline"
-//               >
-//                 Add Note
-//               </button>
-
-//               {/* Show Notes Button */}
-//               <button
-//                 onClick={() => toggleNotes(ticket._id)}
-//                 className="text-blue-500 mt-2 ml-4 underline"
-//               >
-//                 {showNotes === ticket._id ? "Hide Notes" : "Show Notes"}
-//               </button>
-
-//               {/* Display Notes */}
-//               {showNotes === ticket._id && ticket.notes && ticket.notes.length > 0 && (
-//                 <div className="mt-3">
-//                   {ticket.notes.map((note) => (
-//                     <div key={note._id} className="border-t pt-2">
-//                       <p className="text-sm text-gray-700"><strong>{note.addedBy}:</strong> {note.text}</p>
-//                       <p className="text-xs text-gray-500">{new Date(note.timestamp).toLocaleString()}</p>
-//                     </div>
-//                   ))}
-//                 </div>
-//               )}
-
-//               {/* Add Note Section */}
-//               {selectedTicket === ticket._id && (
-//                 <div className="mt-3">
-//                   <textarea
-//                     className="w-full p-2 border rounded-md"
-//                     placeholder="Enter your note"
-//                     value={note}
-//                     onChange={(e) => setNote(e.target.value)}
-//                   ></textarea>
-//                   <button
-//                     onClick={() => handleAddNote(ticket._id)}
-//                     className="bg-green-500 text-white px-4 py-2 rounded-md mt-2 hover:bg-green-600"
-//                   >
-//                     Add Note
-//                   </button>
-//                 </div>
-//               )}
-
-//               {/* Update Ticket Status */}
-//               {selectedTicket === ticket._id && (
-//                 <div className="mt-3">
-//                   <input
-//                     type="text"
-//                     placeholder="Update ticket status"
-//                     value={newStatus}
-//                     onChange={(e) => setNewStatus(e.target.value)}
-//                     className="w-full p-2 border rounded-md mb-3"
-//                   />
-//                   <button
-//                     onClick={() => handleUpdateStatus(ticket._id)}
-//                     className="bg-yellow-500 text-white px-4 py-2 rounded-md mt-2 hover:bg-yellow-600"
-//                   >
-//                     Update Status
-//                   </button>
-//                 </div>
-//               )}
-//             </div>
-//           ))
-//         ) : (
-//           <p className="text-gray-500">No tickets found.</p>
-//         )}
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default AgentPage;
 import React, { useState, useEffect } from "react";
 
 const AgentPage = () => {
@@ -185,7 +16,7 @@ const AgentPage = () => {
 
   const fetchTickets = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/all/tickets", {
+      const response = await fetch(`${backend_url}/api/all/tickets`, {
         method: "GET",
         credentials: "include",
         headers: {
@@ -205,7 +36,7 @@ const AgentPage = () => {
 
   const handleAddNote = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/tickets/${id}/notes`, {
+      const response = await fetch(`${backend_url}/api/tickets/${id}/notes`, {
         method: "POST",
         credentials: "include",
         headers: {
@@ -227,7 +58,7 @@ const AgentPage = () => {
 
   const handleUpdateStatus = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/tickets/${id}/status`, {
+      const response = await fetch(`${backend_url}/api/tickets/${id}/status`, {
         method: "PUT",
         credentials: "include",
         headers: {

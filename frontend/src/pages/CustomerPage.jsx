@@ -13,7 +13,7 @@ const CustomerPage = () => {
 
   const fetchTickets = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/customer/tickets", {
+      const response = await fetch(`${backend_url}/api/customer/tickets`, {
         method: "GET",
         credentials: "include",
         headers: {
@@ -33,7 +33,7 @@ const CustomerPage = () => {
 
   const handleCreateTicket = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/tickets", {
+      const response = await fetch(`${backend_url}/api/tickets`, {
         method: "POST",
         credentials: "include",
         headers: {
@@ -54,7 +54,7 @@ const CustomerPage = () => {
 
   const handleAddNote = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/tickets/${id}/notes`, {
+      const response = await fetch(`${backend_url}/api/tickets/${id}/notes`, {
         method: "POST",
         credentials: "include",
         headers: {

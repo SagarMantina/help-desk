@@ -39,7 +39,7 @@ const HomePage = () => {
   // Handle logout and redirect to home page
   const handleLogout = async () => {
     try {
-      const response = await fetch('http://localhost:5000/logout', {
+      const response = await fetch(`${backend_url}/logout`, {
         method: 'GET',
         credentials: 'include', 
       });
