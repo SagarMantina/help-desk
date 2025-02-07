@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from "react";
-
+const backend_url = "https://help-desk-bfld.onrender.com" || "http://localhost:5000";
 const AgentPage = () => {
   const [tickets, setTickets] = useState([]);
   const [note, setNote] = useState("");
