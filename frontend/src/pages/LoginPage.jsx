@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -16,6 +17,8 @@ const LoginPage = ({ setUser }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+ 
+  const navigate = useNavigate(); 
     try {
       const res = await fetch(`${backend_url}/api/login`, {
         method: "POST",
@@ -32,7 +35,7 @@ const LoginPage = ({ setUser }) => {
         setUser(data.role);
         console.log(data.user.role);
         console.log("redirecting");
-        window.location.href = "/";
+        navigate("/");
       }
       else {
         setError("Invalid credentials");
