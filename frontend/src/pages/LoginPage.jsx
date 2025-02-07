@@ -9,7 +9,7 @@ const LoginPage = ({ setUser }) => {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const navigate = useNavigate();
+  
 
   useEffect(() => {
     AOS.init({ duration: 1000 }); // Initialize AOS animations
