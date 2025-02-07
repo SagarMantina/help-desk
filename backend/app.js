@@ -28,7 +28,12 @@ const userSchema = new mongoose.Schema({
 const User = mongoose.model('User', userSchema);
 
 
-const allowedOrigins = ["http://localhost:5173", "https://help-desk-bfld.onrender.com"];
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://help-desk-bfld.onrender.com",
+  "https://help-desk-1-r2rl.onrender.com" // Add this
+];
+
 
 app.use(cors({
   origin: allowedOrigins, 
