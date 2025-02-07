@@ -1,0 +1,47 @@
+# Step 1: Set up the base image for the Node.js environment
+FROM node:16 AS backend
+
+# Step 2: Set the working directory
+WORKDIR /app
+
+# Step 3: Copy backend package files and install dependencies
+COPY backend/package*.json ./backend/
+RUN cd backend && npm install
+
+# Step 4: Copy the backend source code to the container
+COPY backend /app/backend
+
+# Step 5: Build React app
+FROM node:16 AS frontend
+
+WORKDIR /app
+
+# Copy frontend package files and install dependencies
+COPY frontend/package*.json ./frontend/
+RUN cd frontend && npm install
+
+# Copy frontend source code
+COPY frontend /app/frontend
+
+# Build the React app
+RUN cd frontend && npm run build
+
+# Step 6: Final stage - combine frontend and backend for production
+FROM node:16
+
+WORKDIR /app
+
+# Copy the built React app from the previous stage
+COPY --from=frontend /app/frontend/build /app/frontend/build
+
+# Copy the backend from the previous stage
+COPY --from=backend /app/backend /app/backend
+
+# Install production dependencies for backend
+RUN cd backend && npm install --production
+
+# Expose the necessary port for the app
+EXPOSE 5000
+
+# Step 7: Start the server
+CMD ["npm", "start", "--prefix", "backend"]
