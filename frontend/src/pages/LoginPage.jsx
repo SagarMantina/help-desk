@@ -28,7 +28,8 @@ const LoginPage = ({ setUser }) => {
       const data = await res.json();
 
       if (res.status === 200) {
-        setUser(data.user.role); // Ensuring correct role setting
+        setUser(data.user.role);
+        console.log("LoginSuccess");// Ensuring correct role setting
         navigate("/"); // Redirecting after successful login
       } else {
         setError("Invalid credentials");
