@@ -29,6 +29,7 @@ const LoginPage = ({ setUser }) => {
 
       if (res.status === 200) {
         setUser(data.user.role);
+        localStorage.setItem("role", data.user.role);
         console.log("LoginSuccess");// Ensuring correct role setting
         navigate("/"); // Redirecting after successful login
       } else {
