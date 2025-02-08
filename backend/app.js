@@ -67,22 +67,27 @@ app.post('/api/register', (async (req, res) => {
   res.status(201).json({ message: 'User registered successfully' });
 }));
 
-app.post('/api/login', (async (req, res) => {
-  console.log(req.body);
-  const { name, password } = req.body;
+app.post('/api/login', async (req, res) => {
+  try {
+    const { name, password } = req.body;
+    const user = await User.findOne({ name });
+    if (!user) return res.status(401).json({ error: 'Invalid credentials' });
 
-  const user = await User.findOne({ name });
-  if (!user) return res.status(401).json({ error: 'Invalid credentials' });
-  const isMatch = await bcrypt.compare(password, user.password);
-  if (!isMatch) return res.status(401).json({ error: 'Invalid credentials' });
-  res.cookie("username", name, {
-    httpOnly: false,    // Make cookie accessible to frontend
-    secure: process.env.NODE_ENV === "production", // Set true in production
-    sameSite: "Lax",    // SameSite policy to prevent CSRF
-  });
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) return res.status(401).json({ error: 'Invalid credentials' });
 
-  res.json({ message: 'Login successful', user: { id: user._id, name: user.name, role: user.role } });
-}));
+    res.cookie("username", name, {
+      httpOnly: false,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "Lax",
+    });
+
+    res.status(200).json({ message: 'Login successful', user: { id: user._id, name: user.name, role: user.role } });
+  } catch (error) {
+    console.error("Login Error:", error);
+    res.status(500).json({ error: "Error logging in" });
+  }
+});
 
 app.post('/api/tickets', (async (req, res) => {
   const customerName = req.cookies.username;
