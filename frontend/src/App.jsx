@@ -8,42 +8,38 @@ import CustomerPage from "./pages/CustomerPage";
 import AgentPage from "./pages/AgentPage";
 import HomePage from "./pages/HomePage";
 
-
 function App() {
-  const [role, setRole] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const backend_url = "https://help-desk-bfld.onrender.com";
-  console.log(backend_url);
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const res = await fetch(`${backend_url}/api/role_check`, {
-          method: "GET",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
+  const [role, setRole] = useState(localStorage.getItem("role"));
+  const [loading, setLoading] = useState(false); // No need to wait for API fetch
 
-        const data = await res.json();
-        console.log("Fetched Role Data:", data);
+  // Commented out API fetch since we're using localStorage instead
+  // useEffect(() => {
+  //   const fetchUser = async () => {
+  //     try {
+  //       const res = await fetch(`${backend_url}/api/role_check`, {
+  //         method: "GET",
+  //         credentials: "include",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //       });
 
-        if (res.status === 200 && data.role) {
-          setRole(data.role);
-        }
-      } catch (err) {
-        console.error("Error fetching user role:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
+  //       const data = await res.json();
+  //       console.log("Fetched Role Data:", data);
 
-    fetchUser();
-  }, []);
+  //       if (res.status === 200 && data.role) {
+  //         setRole(data.role);
+  //         localStorage.setItem("role", data.role);
+  //       }
+  //     } catch (err) {
+  //       console.error("Error fetching user role:", err);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
 
-  if (loading) {
-    return <div className="flex justify-center items-center h-screen">Loading...</div>;
-  }
+  //   fetchUser();
+  // }, []);
 
   const redirectToRolePage = () => {
     if (role === "Admin") return "/admin";
@@ -60,15 +56,11 @@ function App() {
             <Route path="/login" element={<LoginPage setUser={setRole} />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/home" element={<HomePage />} />
-            {/* <Route path="/" element={<Navigate to={role ? redirectToRolePage() : "/home"} />} /> */}
             <Route path="/" element={<Navigate to="/home" />} />
-
-
-            <Route path = '/dashboard' element = {<Navigate to={role ? redirectToRolePage() : "/home"} />} />
+            <Route path="/dashboard" element={<Navigate to={role ? redirectToRolePage() : "/home"} />} />
             {role === "Admin" && <Route path="/admin" element={<AdminPage />} />}
             {role === "Customer" && <Route path="/customer" element={<CustomerPage />} />}
             {role === "Agent" && <Route path="/agent" element={<AgentPage />} />}
-
             <Route path="*" element={<Navigate to="/home" />} />
           </Routes>
         </div>
