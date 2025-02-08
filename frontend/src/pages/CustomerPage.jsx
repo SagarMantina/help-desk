@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-const backend_url = "https://help-desk-bfld.onrender.com" || "http://localhost:5000";
+const backend_url = "https://help-desk-bfld.onrender.com";
 const CustomerPage = () => {
   const [tickets, setTickets] = useState([]);
   const [newTicket, setNewTicket] = useState({ title: "" });
   const [note, setNote] = useState("");
   const [selectedTicket, setSelectedTicket] = useState(null);
-  const [showNotes, setShowNotes] = useState(null); // New state to handle notes visibility
+  const [showNotes, setShowNotes] = useState(null);
 
   useEffect(() => {
     fetchTickets();
