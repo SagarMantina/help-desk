@@ -190,7 +190,8 @@ app.get("/api/role_check", async (req, res) => {
         return res.status(404).json({ message: "User not found" });
       }
 
-     
+      console.log("Found Role");
+      console.log(existingUser.role);
       res.status(200).json({ message: "User logged in", role: existingUser.role });
     } else {
       res.status(200).json({ message: "User not logged in" });
