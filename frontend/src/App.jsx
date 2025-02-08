@@ -7,12 +7,13 @@ import AdminPage from "./pages/AdminPage";
 import CustomerPage from "./pages/CustomerPage";
 import AgentPage from "./pages/AgentPage";
 import HomePage from "./pages/HomePage";
-const backend_url = "https://help-desk-bfld.onrender.com" || "http://localhost:5000";
-console.log(backend_url);
+
+
 function App() {
   const [role, setRole] = useState(null);
   const [loading, setLoading] = useState(true);
-
+  const backend_url = "https://help-desk-bfld.onrender.com" || "http://localhost:5000";
+  console.log(backend_url);
   useEffect(() => {
     const fetchUser = async () => {
       try {
