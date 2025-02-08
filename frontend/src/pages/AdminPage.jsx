@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
-const backend_url = "https://help-desk-bfld.onrender.com" || "http://localhost:5000";
+const backend_url = "https://help-desk-bfld.onrender.com";
 const AdminPage = () => {
   const [tickets, setTickets] = useState([]);
   const [note, setNote] = useState("");
   const [newStatus, setNewStatus] = useState("");
   const [users, setUsers] = useState([]);
   const [userStats, setUserStats] = useState({});
-  const [roleChanges, setRoleChanges] = useState({}); // Track role changes for each user
+  const [roleChanges, setRoleChanges] = useState({}); 
   const [toggleState, setToggleState] = useState({
     status: null,
     note: null,
