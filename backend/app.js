@@ -70,6 +70,7 @@ app.post('/api/register', (async (req, res) => {
 app.post('/api/login', async (req, res) => {
   try {
     const { name, password } = req.body;
+    console.log(req.body);
     const user = await User.findOne({ name });
     if (!user) return res.status(401).json({ error: 'Invalid credentials' });
 
