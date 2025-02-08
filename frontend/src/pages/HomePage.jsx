@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { ChevronRight, HelpCircle, Users, Zap, Shield, Check } from 'lucide-react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import { useNavigate } from 'react-router-dom';  // Import useNavigate from react-router-dom
-const backend_url = "https://help-desk-bfld.onrender.com" || "http://localhost:5000";
+import { useNavigate } from 'react-router-dom';  
+const backend_url = "https://help-desk-bfld.onrender.com";
 // Function to get a cookie value by its name
 const getCookie = (name) => {
   const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
