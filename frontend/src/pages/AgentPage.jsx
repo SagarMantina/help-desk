@@ -1,13 +1,13 @@
 
 import React, { useState, useEffect } from "react";
-const backend_url = "https://help-desk-bfld.onrender.com" || "http://localhost:5000";
+const backend_url = "https://help-desk-bfld.onrender.com";
 const AgentPage = () => {
   const [tickets, setTickets] = useState([]);
   const [note, setNote] = useState("");
   const [newStatus, setNewStatus] = useState("");
   const [toggleState, setToggleState] = useState({
-    status: null, // Tracks which ticket is toggling the status section
-    note: null, // Tracks which ticket is toggling the note section
+    status: null, 
+    note: null,
   });
 
   useEffect(() => {
