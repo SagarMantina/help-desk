@@ -4,11 +4,6 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useNavigate } from 'react-router-dom';  
 const backend_url = "https://help-desk-bfld.onrender.com";
-// Function to get a cookie value by its name
-const getCookie = (name) => {
-  const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
-  return match ? match[2] : null;
-};
 
 const HomePage = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -20,9 +15,9 @@ const HomePage = () => {
       once: true
     });
 
-    // Check if the user is logged in by checking for a specific cookie
-    const username = getCookie('username');
-    if (username) {
+    // Check if the user is logged in by checking localStorage for role
+    const role = localStorage.getItem('role');
+    if (role) {
       setIsLoggedIn(true);
     }
   }, []);
@@ -45,6 +40,7 @@ const HomePage = () => {
       });
 
       if (response.ok) {
+        localStorage.removeItem('role');
         setIsLoggedIn(false);
         navigate('/');
       } else {
@@ -118,8 +114,7 @@ const HomePage = () => {
           </div>
         </div>
       </header>
-
-      {/* Ticket Lifecycle Roadmap */}
+       {/* Ticket Lifecycle Roadmap */}
       <section id="how-it-works" className="bg-gray-50 py-16">
         <div className="container mx-auto px-4">
           <h2 className="text-4xl font-bold text-center mb-12">How HelpDesk Works</h2>
